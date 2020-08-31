@@ -1,0 +1,15 @@
+.answer_details {
+  margin: 20px 0;
+  padding: 20px;
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
+.answer_details--header {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.answer_details--text {
+  margin-top: 20px;
+}
