@@ -1,0 +1,22 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  color: white;
+  overflow: hidden;
+
+  .navbar--item {
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    background-color: green;
+    transition: background-color 0.4s;
+  }
+
+  .navbar--item-active {
+    background-color: #175417;
+  }
+}
