@@ -6,7 +6,7 @@ import {
   PAUSE_ICO,
   PLAY_ICO
 } from "./constants.AudioPlayer";
-import { formatTime } from "../../utils/utils.AudioPlayer";
+import { formatTime } from "./utils.AudioPlayer";
 
 const AudioPlayer = ({ src }) => {
   const [volume, setVolume] = useState(VOLUME_INPUT_MAX);
