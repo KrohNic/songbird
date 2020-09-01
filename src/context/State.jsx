@@ -9,6 +9,7 @@ import {
   SET_LEVEL,
   SHOW_DETAILS
 } from "../context/types";
+import { playIncorrectSound, playCorrectSound } from "../utils/utils";
 
 const State = ({ children }) => {
   const getRightAnswerIndex = levelData => {
@@ -72,8 +73,10 @@ const State = ({ children }) => {
     let payload = { data: [...data] };
 
     if (itemIndex !== rightAnswerIndex) {
+      playIncorrectSound();
       payload.data[level][itemIndex].type = "wrong";
     } else {
+      playCorrectSound();
       payload.data[level][itemIndex].type = "right";
       payload.score = getLevelScore();
       payload.isLevelPassed = true;

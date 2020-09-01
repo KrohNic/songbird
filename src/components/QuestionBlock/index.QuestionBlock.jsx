@@ -3,7 +3,10 @@ import "./QuestionBlock.scss";
 import { Context } from "../../context/context";
 import BirdImg from "../BirdImg/index.BirdImg";
 import AudioPlayer from "../AudioPlayer/index.AudioPlayer";
-import { BIRD_IMG_PLACEHOLDER, BIRD_NAME_PLACEHOLDER } from "../../data/consts";
+import {
+  BIRD_IMG_PLACEHOLDER,
+  BIRD_NAME_PLACEHOLDER
+} from "../../constants/constants";
 
 const QuestionBlock = () => {
   const { state, questionAudio } = useContext(Context);
