@@ -15,10 +15,15 @@ const GameResults = () => {
         баллов
       </span>
       <br />
-      {state.score < maxScore && (
+      {state.score < maxScore ? (
         <button className="button" onClick={resetState}>
           Попробовать еще раз!
         </button>
+      ) : (
+        <>
+          <h3>Абсолютная победа!</h3>
+          <big>Теперь ты знаешь кто чирикнул!</big>
+        </>
       )}
     </div>
   );
