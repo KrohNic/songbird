@@ -4,9 +4,10 @@ import {
   SEEK_INPUT_SCALE,
   VOLUME_INPUT_MAX,
   PAUSE_ICO,
-  PLAY_ICO
+  PLAY_ICO,
+  STOP_PLAYING_EVENT_NAME
 } from "./constants.AudioPlayer";
-import { formatTime } from "./utils.AudioPlayer";
+import { formatTime, stopAllPlayers } from "./utils.AudioPlayer";
 
 const AudioPlayer = ({ src }) => {
   const [volume, setVolume] = useState(VOLUME_INPUT_MAX);
@@ -29,12 +30,14 @@ const AudioPlayer = ({ src }) => {
     audioRef.current.addEventListener("canplaythrough", canplayHandler);
     audioRef.current.addEventListener("ended", endedHandler);
     audioRef.current.addEventListener("timeupdate", timeUpdated);
+    document.addEventListener(STOP_PLAYING_EVENT_NAME, stopPlaying);
     return () => {
       audioRef.current.pause();
 
       audioRef.current.removeEventListener("canplaythrough", canplayHandler);
       audioRef.current.removeEventListener("ended", endedHandler);
-      audioRef.current.addEventListener("timeupdate", timeUpdated);
+      audioRef.current.removeEventListener("timeupdate", timeUpdated);
+      document.removeEventListener(STOP_PLAYING_EVENT_NAME, stopPlaying);
     };
   }, [src]);
 
@@ -62,18 +65,33 @@ const AudioPlayer = ({ src }) => {
     setVolume(newVolume);
   };
 
+  const stopPlaying = event => {
+    if (!audioRef.current && audioRef.current.paused) return;
+
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+
   const timeUpdated = () => {
     const currentTime = audioRef.current.currentTime;
 
     setTimePassed(currentTime);
   };
 
+  const play = () => {
+    queueMicrotask(() => audioRef.current.play());
+  };
+
   const playClickHandler = () => {
     if (audioRef.current.paused) {
       audioRef.current.currentTime = seek / SEEK_INPUT_SCALE;
+      play();
+
+      stopAllPlayers();
 
       setIsPlaying(true);
     } else {
+      audioRef.current.pause();
       setIsPlaying(false);
     }
   };
@@ -88,19 +106,6 @@ const AudioPlayer = ({ src }) => {
       setVolume(0);
     }
   };
-
-  if (audioRef.current) {
-    if (!isPlaying) {
-      if (!audioRef.current.paused) {
-        audioRef.current.pause();
-      }
-    } else if (
-      audioRef.current.paused &&
-      audioRef.current.currentTime !== audioRef.current.duration
-    ) {
-      audioRef.current.play();
-    }
-  }
 
   return (
     <div className="audio_player">

@@ -10,6 +10,7 @@ import {
   SHOW_DETAILS
 } from "../context/types";
 import { playIncorrectSound, playCorrectSound } from "../utils/utils";
+import { stopAllPlayers as AllAudioPlayersStop } from "../components/AudioPlayer/utils.AudioPlayer";
 
 const State = ({ children }) => {
   const getRightAnswerIndex = levelData => {
@@ -76,6 +77,7 @@ const State = ({ children }) => {
       playIncorrectSound();
       payload.data[level][itemIndex].type = "wrong";
     } else {
+      AllAudioPlayersStop();
       playCorrectSound();
       payload.data[level][itemIndex].type = "right";
       payload.score = getLevelScore();
