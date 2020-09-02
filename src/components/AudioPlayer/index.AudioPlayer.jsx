@@ -3,8 +3,6 @@ import "./AudioPlayer.scss";
 import {
   SEEK_INPUT_SCALE,
   VOLUME_INPUT_MAX,
-  PAUSE_ICO,
-  PLAY_ICO,
   STOP_PLAYING_EVENT_NAME
 } from "./constants.AudioPlayer";
 import { formatTime, stopAllPlayers } from "./utils.AudioPlayer";
@@ -110,12 +108,12 @@ const AudioPlayer = ({ src }) => {
   return (
     <div className="audio_player">
       <button
-        className="audio_player--play_btn"
+        className={
+          isPlaying ? "audio_player--pause_btn" : "audio_player--play_btn"
+        }
         disabled={isControlsDisabled}
         onClick={playClickHandler}
-      >
-        {isPlaying ? PAUSE_ICO : PLAY_ICO}
-      </button>
+      ></button>
       <div className="audio_player--time_seek">
         <div className="audio_player--seek prog_range">
           <progress

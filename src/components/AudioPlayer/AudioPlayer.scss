@@ -1,7 +1,8 @@
 :root {
   --player_h: 2rem;
-  --player_color: #41ba41;
 }
+
+$player_color: #41ba41;
 
 .prog_range {
   width: calc(100% - 10px);
@@ -24,7 +25,7 @@
 }
 
 .prog_range-progress::-webkit-progress-value {
-  background-color: var(--player_color);
+  background-color: $player_color;
 }
 
 .prog_range-progress::-webkit-progress-bar {
@@ -34,7 +35,7 @@
 
 .prog_range-progress::-moz-progress-bar {
   height: calc(var(--player_h) * 0.1);
-  background-color: var(--player_color);
+  background-color: $player_color;
   border-radius: var(--player_h);
 }
 
@@ -47,6 +48,7 @@
   -moz-appearance: none;
   appearance: none;
   background-color: transparent;
+  outline: none;
 }
 
 .prog_range-range::-moz-range-track {
@@ -65,7 +67,7 @@
   -webkit-appearance: none;
   width: calc(var(--player_h) / 2);
   height: calc(var(--player_h) / 2);
-  background-color: var(--player_color);
+  background-color: $player_color;
   border: none;
   border-radius: 50%;
 }
@@ -73,7 +75,7 @@
 .prog_range-range::-moz-range-thumb {
   width: calc(var(--player_h) / 2);
   height: calc(var(--player_h) / 2);
-  background-color: var(--player_color);
+  background-color: $player_color;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -90,33 +92,48 @@
   width: var(--player_h);
   height: var(--player_h);
   padding: 0;
-  border-radius: 50%;
-  border: 2px solid var(--player_color);
-  background-color: transparent;
-  color: var(--player_color);
-  font-weight: bolder;
-  font-size: calc(var(--player_h) / 2.5);
+  border: none;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 90%;
+  mask-size: 90%;
+  mask-position: center;
+  -webkit-mask-position: center;
+  background-color: $player_color;
+  outline-offset: 0.2rem;
   cursor: pointer;
-  transition: border-width 0.5s, background-color 0.5s;
+
+  transition: -webkit-mask-size 0.3s, background-color 0.5s;
 
   &:hover {
-    border-width: 4px;
+    -webkit-mask-size: 100%;
+    mask-size: 100%;
   }
 
   &:disabled {
-    color: gray;
-    border: 2px solid gray;
+    background-color: gray;
   }
 
   &:active {
-    color: white;
-    background-color: var(--player_color);
-    transition: border-width 0.2s, background-color 0.2s, color 0.2s;
+    background-color: gold;
+    transition: background-color 0.2s;
   }
 }
 
 .audio_player--play_btn {
   @extend %btn-shared;
+
+  -webkit-mask-image: url("../../../assets/ico/play.svg");
+  mask-image: url("../../../assets/ico/play.svg");
+}
+
+.audio_player--pause_btn {
+  @extend %btn-shared;
+
+  -webkit-mask-image: url("../../../assets/ico/pause.svg");
+  mask-image: url("../../../assets/ico/pause.svg");
 }
 
 .audio_player--time_seek {
@@ -139,8 +156,14 @@
 .audio_player--mute_btn {
   @extend %btn-shared;
 
+  -webkit-mask-image: url("../../../assets/ico/speaker.svg");
+  mask-image: url("../../../assets/ico/speaker.svg");
+
   &-muted {
     @extend %btn-shared;
+
+    -webkit-mask-image: url("../../../assets/ico/mute.svg");
+    mask-image: url("../../../assets/ico/mute.svg");
     background-color: red;
   }
 }
