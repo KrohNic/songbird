@@ -29,7 +29,7 @@ export const App = () => {
       ) : (
         <Fragment>
           <QuestionBlock />
-          <div className="flex">
+          <div className="answer">
             <AnswerList />
             <AnswerDetailsBlock />
           </div>

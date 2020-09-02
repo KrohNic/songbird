@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import "./AnswerDetailsBlock.scss";
 import { Context } from "../../context/context";
 import BirdImg from "../BirdImg/index.BirdImg";
@@ -18,21 +18,20 @@ const AnswerDetailsBlock = () => {
   return (
     <div className="gray_block block_border answer_details">
       {state.answerDetails ? (
-        <Fragment>
-          <div className="flex">
+        <>
+          <div className="answer_details--img_wrapper">
             <BirdImg src={state.answerDetails.image} />
-            <div className="answer_details--header">
-              <span>{state.answerDetails.name}</span>
-              <hr />
-              <span>{state.answerDetails.species}</span>
-              <hr />
-              <AudioPlayer src={state.answerDetails.audio} />
-            </div>
           </div>
+          <span>{state.answerDetails.name}</span>
+          <hr />
+          <span>{state.answerDetails.species}</span>
+          <hr />
           <div className="answer_details--text">
             {state.answerDetails.description}
           </div>
-        </Fragment>
+          <hr />
+          <AudioPlayer src={state.answerDetails.audio} />
+        </>
       ) : (
         <DetailPlaceholder />
       )}

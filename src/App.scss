@@ -70,3 +70,22 @@ code {
 .button:disabled {
   background: gray;
 }
+
+.answer {
+  margin: 20px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+@media (max-width: 1005px) {
+  .wrapper {
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 750px) {
+  .answer {
+    flex-wrap: wrap;
+  }
+}
