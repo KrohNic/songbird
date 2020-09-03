@@ -13,7 +13,11 @@ import GameResults from "./components/GameResults/index.GameResults";
 export const App = () => {
   const { state } = useContext(Context);
 
-  // console.log(state);
+  const answer = state.data[state.level][state.rightAnswerIndex].name;
+
+  useEffect(() => {
+    console.log(`Ответ - ${answer}`);
+  }, [answer]);
 
   if (state.loading) return <p>Loading...</p>;
 
