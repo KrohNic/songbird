@@ -1,0 +1,17 @@
+.question {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 1.4rem;
+}
+
+.question--vertical_block {
+  flex-grow: 1;
+}
+
+.question--hr {
+  border: none;
+  border-top: 1px solid gray;
+}

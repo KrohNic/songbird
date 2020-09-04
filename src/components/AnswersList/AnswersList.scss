@@ -1,0 +1,39 @@
+.answer_list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  font-size: 1.4rem;
+}
+
+.answer_list--item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.answer_list--item + .answer_list--item {
+  border-top: 1px solid #3d3d3d;
+}
+
+.answer_list--item:hover {
+  background-color: #444;
+}
+
+.answer_list--item:active {
+  background-color: #656565;
+}
+
+.answer_list--item:before {
+  content: "●";
+  padding: 0 10px;
+  color: #606060;
+}
+
+.answer_list--item-wrong:before {
+  color: red;
+}
+
+.answer_list--item-right:before {
+  color: #4ca537;
+}
